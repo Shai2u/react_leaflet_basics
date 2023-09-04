@@ -10,7 +10,10 @@ import { debounce } from '@mui/material/utils';
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
-const GOOGLE_MAPS_API_KEY = 'Get Your own API!'
+const GOOGLE_MAPS_API_KEY = 'AIzaSyDWmCcCe6sQOB83-AIz_0VkvgbxBOPlwnM';
+// const GOOGLE_MAPS_API_KEY = 'Get Your own API!'
+//AIzaSyDWmCcCe6sQOB83-AIz_0VkvgbxBOPlwnM
+// AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -26,7 +29,7 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-export default function AutoComplete() {
+export default function AutoComplete({displayCoordinate}) {
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
@@ -47,6 +50,10 @@ export default function AutoComplete() {
   const fetch = React.useMemo(
     () =>
       debounce((request, callback) => {
+        console.log('request');
+        console.log(request);
+        console.log('callback');
+        console.log(callback);
         autocompleteService.current.getPlacePredictions(request, callback);
       }, 400),
     [],
@@ -111,7 +118,7 @@ export default function AutoComplete() {
         setInputValue(newInputValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Add a location" fullWidth />
+        <TextField {...params} label="Find your location" fullWidth />
       )}
       renderOption={(props, option) => {
         const matches =
@@ -122,8 +129,11 @@ export default function AutoComplete() {
           matches.map((match) => [match.offset, match.offset + match.length]),
         );
 
+      const sayHello = () => {
+        displayCoordinate(option['place_id'])
+      };
         return (
-          <li {...props}>
+          <li {...props} onClick = {sayHello}>
             <Grid container alignItems="center">
               <Grid item sx={{ display: 'flex', width: 44 }}>
                 <LocationOnIcon sx={{ color: 'text.secondary' }} />
