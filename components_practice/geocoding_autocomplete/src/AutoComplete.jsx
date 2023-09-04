@@ -10,8 +10,7 @@ import { debounce } from '@mui/material/utils';
 
 // This key was created specifically for the demo in mui.com.
 // You need to create a new one for your application.
-const GOOGLE_MAPS_API_KEY = 'AIzaSyDWmCcCe6sQOB83-AIz_0VkvgbxBOPlwnM';
-// const GOOGLE_MAPS_API_KEY = 'Get Your own API!'
+const GOOGLE_MAPS_API_KEY = 'Get Your own API!'
 //AIzaSyDWmCcCe6sQOB83-AIz_0VkvgbxBOPlwnM
 // AIzaSyC3aviU6KHXAjoSnxcw6qbOhjnFctbxPkE
 
