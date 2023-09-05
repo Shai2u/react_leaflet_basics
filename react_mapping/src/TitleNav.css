@@ -1,0 +1,19 @@
+.heading {
+    margin: 0;
+    padding: 0px;
+    color: rgb(0, 0, 0);
+    background-color:  rgba(255, 255, 255, 20);
+    border-radius: 10px;  /*Add radius*/
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  /*add shadow */
+    text-align: center;
+    position: absolute;
+    left: 50%; /* Positions the left edge at the center of the first div */
+    top: 10px;
+    transform: translate(-50%,0%); /* Centers the div */
+    z-index: 2;
+  }
+  
+  .heading > h1 {
+    padding: 20px;
+    margin: 0;
+  }
