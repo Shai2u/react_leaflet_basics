@@ -1,0 +1,13 @@
+.pane {
+    background-color:  rgba(255, 255, 255, 0.8);
+    border-radius: 10px;  /*Add radius*/
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);  /*add shadow */
+    position: absolute;
+    right: 10px; /* Positions the left edge at the center of the first div */
+    top: 50%;
+    width: 200px;
+    height:90%;
+    transform: translate(0%, -50%); /* Centers the div */
+    z-index: 3;
+  }
+  
