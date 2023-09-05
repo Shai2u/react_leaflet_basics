@@ -36,9 +36,9 @@ export default function CoordinatesList() {
             })
         })
     }
-    const addTodo = (text) => {
+    const addTodo = (lng, lat) => {
         setTodos(prevTodos => {
-            return [...prevTodos, {text: text, id:crypto.randomUUID(), completed: false}]
+            return [...prevTodos, {lng: lng, lat:lat, id:crypto.randomUUID(), completed: false}]
         })
     }
     return (

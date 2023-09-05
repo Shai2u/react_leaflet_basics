@@ -32,7 +32,8 @@ export default function CoordinateItem({todo, remove, toggle}){
               onChange={toggle}
             />
           </ListItemIcon>
-          <ListItemText  primary={todo.text} />
+          <ListItemText  primary={todo.lng} />
+          <ListItemText  primary={todo.lat} />
         </ListItemButton>
       </ListItem>
     );

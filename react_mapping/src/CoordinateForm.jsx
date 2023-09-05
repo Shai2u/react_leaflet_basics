@@ -6,34 +6,45 @@ import { IconButton } from "@mui/material";
 import { useState } from "react";
 
 export default function CoordinateForm({addTodo}){
-    const [text, setText]= useState("");
-    const handleChnage = (evt) => {
-        setText(evt.target.value)
+    const [lng, setLng]= useState("");
+    const [lat, setLat]= useState("");
+
+    const handleChnageLng = (evt) => {
+        setLng(evt.target.value)
+    }
+
+    const handleChnageLat = (evt) => {
+        setLat(evt.target.value)
     }
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        console.log('in');
-        addTodo(text);
-        setText("");
+        addTodo(lng, lat);
+        setLng("");
+        setLat("");
     }
     return(
         
         <ListItem>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{display: "flex"}}>
                 <TextField 
                 id="outlined-basic"
-                label="Add to do"
+                label="longitude"
                 variant="outlined"
-                onChange={handleChnage} 
-                value={text} InputProps={{
-                    endAdornment: (
-                    <InputAdornment position="end">
-                        <IconButton aria-label="create todo" edge="end" type="submit">
-                        <Create />
-                        </IconButton>
-                    </InputAdornment>
-                    ),
-                }}/>
+                onChange={handleChnageLng} 
+                value={lng} 
+                style={{paddingRight: "10px"}}
+                />
+                <TextField 
+                id="outlined-basic"
+                label="latitude"
+                variant="outlined"
+                onChange={handleChnageLat} 
+                value={lat} 
+                
+                />
+                <IconButton aria-label="create todo" edge="end" type="submit">
+                <Create />
+                </IconButton>
             </form>
         
         </ListItem>
