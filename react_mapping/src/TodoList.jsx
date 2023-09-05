@@ -4,13 +4,6 @@ import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
 import { Box,Typography } from '@mui/material';
 
-// const initialTodos = [
-//     {id: 1, text: "Walk the dog", completed: false},
-//     {id: 2, text: "Walk the cat", completed: false},
-//     {id: 3, text: "Walk the fish", completed: true},
-//     {id: 4, text: "Walk the chickens", completed: false},
-//     {id: 5, text: "Walk the cow", completed: false},
-// ]
 
 const getInitialData = () => {
     const data = JSON.parse(localStorage.getItem("todos"))
