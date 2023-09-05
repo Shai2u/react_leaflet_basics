@@ -5,7 +5,7 @@ import { InputAdornment } from "@mui/material";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
 
-export default function TodoForm({addTodo}){
+export default function CoordinateForm({addTodo}){
     const [text, setText]= useState("");
     const handleChnage = (evt) => {
         setText(evt.target.value)
