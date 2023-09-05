@@ -21,7 +21,7 @@ export default function CoordinateItem({todo, remove, toggle}){
         }
         disablePadding
       >
-        <ListItemButton role={undefined} dense>
+        <ListItemButton id={labelId} role={undefined} dense>
           <ListItemIcon>
             <Checkbox
               edge="start"
@@ -32,7 +32,7 @@ export default function CoordinateItem({todo, remove, toggle}){
               onChange={toggle}
             />
           </ListItemIcon>
-          <ListItemText id={labelId} primary={todo.text} />
+          <ListItemText  primary={todo.text} />
         </ListItemButton>
       </ListItem>
     );
