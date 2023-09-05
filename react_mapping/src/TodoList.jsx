@@ -52,8 +52,8 @@ export default function TodoList() {
                 m: 3,
             }}
         >
-            <Typography variant="h2" component="h1" sx={{ flexGrow: 1 }}>
-                Todos
+            <Typography variant="h3" component="h1" sx={{ flexGrow: 5 }}>
+                Coordinates
             </Typography>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {todos.map((todo) => (
