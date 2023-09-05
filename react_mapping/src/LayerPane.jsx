@@ -1,11 +1,11 @@
 import React from 'react';
 import './LayerPane.css';
-import TodoList from './TodoList'
+import CoordinatesList from './CoordinatesList'
 
 export default function LayerPane(){
   return (
     <div className="pane">
-        <TodoList/>
+        <CoordinatesList/>
     </div>
   );
 }

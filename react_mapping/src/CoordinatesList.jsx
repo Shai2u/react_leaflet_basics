@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import List from '@mui/material/List';
-import TodoItem from './TodoItem';
-import TodoForm from './TodoForm';
+import CoordinateItem from './CoordinateItem';
+import CoordinateForm from './CoordinateForm';
 import { Box,Typography } from '@mui/material';
 
 
@@ -57,13 +57,13 @@ export default function CoordinatesList() {
             </Typography>
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 {todos.map((todo) => (
-                    <TodoItem
+                    <CoordinateItem
                         todo={todo}
                         key={todo.id}
                         remove={removeTodo}
                         toggle={() => toggleTodo(todo.id)} />
                 ))}
-                <TodoForm addTodo={addTodo} />
+                <CoordinateForm addTodo={addTodo} />
             </List>
         </Box>
         
