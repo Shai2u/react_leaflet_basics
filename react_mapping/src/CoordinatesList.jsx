@@ -12,7 +12,7 @@ const getInitialData = () => {
 }
 
 
-export default function TodoList() {
+export default function CoordinatesList() {
     const [todos, setTodos] = useState(getInitialData)
     useEffect(()=> {
         localStorage.setItem("todos", JSON.stringify(todos))
