@@ -48,7 +48,7 @@ function App() {
           </Popup>
         </Marker>
       </MapContainer>
-      {/* <ChangeBaseMap baseMapValue = {baseMap} updateBaseMap={setBaseMap}/> */}
+      <ChangeBaseMap baseMapValue = {baseMap} updateBaseMap={setBaseMap}/>
 
 
     </div>
