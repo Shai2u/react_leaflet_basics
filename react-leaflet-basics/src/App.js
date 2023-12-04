@@ -106,6 +106,10 @@ function App() {
         <Button onClick={handleShowBaseMap}>
           {showAddBaseMap ? "Close" : "Add Basemap"}
         </Button>
+
+        <Button>
+          Add new poitns
+        </Button>
       </div>
 
     </div>
