@@ -44,15 +44,18 @@ function App() {
       iconSize: [24,32]
     }
   )
-    console.log(baseMap)
-  // function handleSetBaseMap(updatedBaseMap) {
-  //   setBaseMap((basemap) => updatedBaseMap);
-  // }
 
-  function handleAddFriend(basemap) {
+
+  function handleAddBaseMap(basemap) {
     setBaseMapList((basemaps) => [...basemaps, basemap]);
     setShowAddBaseMap(false);
   }
+
+  function handleShowBaseMap() {
+    setShowAddBaseMap((show) => !show);
+  }
+
+
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
 
   return (
@@ -74,7 +77,12 @@ function App() {
 
         <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
         {showAddBaseMap &&
-          <AddBaseMap onAddBaseMap={handleAddFriend} />}
+          <AddBaseMap onAddBaseMap={handleAddBaseMap} />}
+
+
+        <Button onClick={handleShowBaseMap}>
+          {showAddBaseMap ? "Close" : "Add Basemap"}
+        </Button>
       </div>
 
     </div>
@@ -97,7 +105,6 @@ function ChangeBaseMap({baseMapValue, updateBaseMap, baseMapList}) {
         onChange={(e) => {
 
           updateBaseMap(e.target.value)
-          console.log(e.target.value)
         }
       }
       >
