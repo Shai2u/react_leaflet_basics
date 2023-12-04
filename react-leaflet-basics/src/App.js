@@ -3,7 +3,7 @@ import './App.css';
 import "./styles.css";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { Icon } from 'leaflet';
+import { Icon, marker } from 'leaflet';
 import { useState } from "react";
 
 
@@ -32,11 +32,29 @@ const initalBasemaps = [
     url: "http://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
   },
 ]
+
+const initalMarkers = [
+  {
+    key: 10,
+    label: 'תחנת רכבת יצחק נבון',
+    position: [31.7882, 35.20252],
+    color: 'red'
+  },
+  {
+    key: 11,
+    label: 'אונרה',
+    position: [31.7971, 35.2257],
+    color: 'blue'
+  }
+
+]
 function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
   const [showAddBaseMap, setShowAddBaseMap] = useState(false)
-  const position = [51.505, -0.09]
+  const position = [31.784722, 35.204722]
+  
+
   // create custom icon
   const customIcon = new Icon (
     {
@@ -61,17 +79,21 @@ function App() {
   return (
     <div className="App">
 {/* http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png */}
-      <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+      <MapContainer center={position} zoom={13}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url={selectedBaseMap[0].url}
       />
       
-        <Marker position={position} icon={customIcon}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {
+          initalMarkers.map((markerData) => (
+            <Marker position={markerData.position} icon={customIcon} key={markerData.key}>
+              <Popup>
+                {markerData.label}
+              </Popup>
+            </Marker>
+          ))
+        }
       </MapContainer>
       <div>
 
