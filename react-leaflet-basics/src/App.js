@@ -107,6 +107,8 @@ function App() {
           {showAddBaseMap ? "Close" : "Add Basemap"}
         </Button>
 
+        <AddMarkers/>
+
         <Button>
           Add new poitns
         </Button>
@@ -207,6 +209,19 @@ function AddBaseMap({ onAddBaseMap}) {
     </form>
   )
 }
+
+function AddMarkers() {
+  return (
+    <form >
+      <label>Label</label>
+      <input
+        type="text"
+      />
+      <Button>Add</Button>
+    </form>
+  );
+}
+
 
 function Button({ children, onClick }) {
   return (
