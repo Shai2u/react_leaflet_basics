@@ -52,6 +52,7 @@ function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
   const [showAddBaseMap, setShowAddBaseMap] = useState(false)
+  const [markerPoints, setMarkerPoints] = useState(initalMarkers)
   const position = [31.784722, 35.204722]
   
 
@@ -86,7 +87,7 @@ function App() {
       />
       
         {
-          initalMarkers.map((markerData) => (
+          markerPoints.map((markerData) => (
             <Marker position={markerData.position} icon={customIcon} key={markerData.key}>
               <Popup>
                 {markerData.label}
