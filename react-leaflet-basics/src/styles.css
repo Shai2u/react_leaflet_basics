@@ -43,6 +43,12 @@
 
   .change-base-map {
     display: flex;
-    padding: 25rem 0rem;
+    padding: 15rem 0rem;
+
+  }
+
+  .add-base-map {
+    display: flex;
+    padding: 10rem 0rem;
 
   }

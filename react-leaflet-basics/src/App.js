@@ -66,8 +66,11 @@ function App() {
           </Popup>
         </Marker>
       </MapContainer>
-      <ChangeBaseMap baseMapValue = {baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList}/>
+      <div>
 
+        <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
+        <AddBaseMap />
+      </div>
 
     </div>
   );
@@ -95,4 +98,10 @@ function ChangeBaseMap({baseMapValue, updateBaseMap, baseMapList}) {
 
     </form>
   );
+}
+
+function AddBaseMap() {
+  return (
+    <div className="add-base-map">Hello World</div>
+  )
 }
