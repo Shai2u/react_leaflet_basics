@@ -9,9 +9,9 @@ import { useState } from "react";
 
 //IDeas
 // Add icons from a form
-// change basemap
+// change basemap - Done
 // change icon style
-// Add costum basemap style
+// Add costum basemap style - Done
 // look up more examples on the internet
 
 const initalBasemaps = [
