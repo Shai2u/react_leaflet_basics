@@ -35,6 +35,7 @@ const initalBasemaps = [
 function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
+  const [showAddBaseMap, setShowAddBaseMap] = useState(false)
   const position = [51.505, -0.09]
   // create custom icon
   const customIcon = new Icon (
@@ -50,10 +51,9 @@ function App() {
 
   function handleAddFriend(basemap) {
     setBaseMapList((basemaps) => [...basemaps, basemap]);
-    // setShowAddBaseMap(false);
+    setShowAddBaseMap(false);
   }
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
-  console.log(selectedBaseMap[0].url)
 
   return (
     <div className="App">
@@ -73,8 +73,8 @@ function App() {
       <div>
 
         <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
-        <AddBaseMap onAddBaseMap = {handleAddFriend} />
-        {/* <AddBaseMap /> */}
+        {showAddBaseMap &&
+          <AddBaseMap onAddBaseMap={handleAddFriend} />}
       </div>
 
     </div>
