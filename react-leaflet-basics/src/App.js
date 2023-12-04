@@ -14,8 +14,25 @@ import { useState } from "react";
 // Add costum basemap style
 // look up more examples on the internet
 
+const initalBasemaps = [
+  {
+    id: 1,
+    shortname: 'osm',
+    longname: 'Open Street Map',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+  },
+  {
+    id: 2,
+    shortname: 'carto',
+    longname: 'Carto Dark',
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    url: "http://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
+  },
+]
 function App() {
   const [baseMap, setBaseMap] = useState("osm");
+  const [baseMapList, setBaseMapList] = useState(initalBasemaps)
   const position = [51.505, -0.09]
   // create custom icon
   const customIcon = new Icon (
@@ -34,6 +51,7 @@ function App() {
 
 
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        
         {baseMap ==='osm' && <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -48,7 +66,7 @@ function App() {
           </Popup>
         </Marker>
       </MapContainer>
-      <ChangeBaseMap baseMapValue = {baseMap} updateBaseMap={setBaseMap}/>
+      <ChangeBaseMap baseMapValue = {baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList}/>
 
 
     </div>
@@ -59,18 +77,20 @@ export default App;
 
 
 
-function ChangeBaseMap({baseMapValue, updateBaseMap}) {
+function ChangeBaseMap({baseMapValue, updateBaseMap, baseMapList}) {
 
   return (
     <form className="change-base-map">
 
       <label>Change Base Map</label>
+      
       <select
         value={baseMapValue}
         onChange={(e) => updateBaseMap(e.target.value)}
       >
-        <option value="osm">OpenStreetMap</option>
-        <option value="carto">Carto</option>
+        {baseMapList.map((basemap) => (
+          <option value ={basemap.shortname}>{basemap.longname}</option>
+        ))}
       </select>
 
     </form>
