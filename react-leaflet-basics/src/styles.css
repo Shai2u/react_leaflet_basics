@@ -41,14 +41,48 @@
   /* grid-template-columns: 34rem 44rem;
   column-gap: 4rem; */
 
-  .change-base-map {
-    display: flex;
-    padding: 15rem 0rem;
 
-  }
 
-  .add-base-map {
+  /* .add-base-map {
     display: flex;
     padding: 10rem 0rem;
 
+  } */
+  form {
+    font-size: 1.6rem;
+    display: grid;
+    align-items: center;
+    gap: 1.2rem;
+  
+    background-color: var(--color-lightest);
+    border-radius: 7px;
+  }
+  
+  input,
+select {
+
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--color-light);
+  transition: 0.3s;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border: 1px solid var(--color-dark);
+}
+
+form .button {
+  margin-top: 0.6rem;
+  grid-column: 2;
+}
+
+
+  .add-base-map{
+    padding: 3.2rem 5rem;
+  }
+  .change-base-map {
+    display: flex;
+    padding: 3.2rem 5rem;
   }

@@ -17,6 +17,7 @@ import { useState } from "react";
 const initalBasemaps = [
   {
     id: 1,
+    key: 1,
     shortname: 'osm',
     longname: 'Open Street Map',
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -24,6 +25,7 @@ const initalBasemaps = [
   },
   {
     id: 2,
+    key:2,
     shortname: 'carto',
     longname: 'Carto Dark',
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -41,25 +43,27 @@ function App() {
       iconSize: [24,32]
     }
   )
-
+    console.log(baseMap)
   // function handleSetBaseMap(updatedBaseMap) {
   //   setBaseMap((basemap) => updatedBaseMap);
   // }
 
+  function handleAddFriend(basemap) {
+    setBaseMapList((basemaps) => [...basemaps, basemap]);
+    // setShowAddBaseMap(false);
+  }
+  const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
+  console.log(selectedBaseMap[0].url)
+
   return (
     <div className="App">
-
-
+{/* http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png */}
       <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
-        
-        {baseMap ==='osm' && <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />}
-        {baseMap ==='carto' && <TileLayer
+      <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="http://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
-      /> }
+        url={selectedBaseMap[0].url}
+      />
+      
         <Marker position={position} icon={customIcon}>
           <Popup>
             A pretty CSS3 popup. <br /> Easily customizable.
@@ -69,7 +73,8 @@ function App() {
       <div>
 
         <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
-        <AddBaseMap />
+        <AddBaseMap onAddBaseMap = {handleAddFriend} />
+        {/* <AddBaseMap /> */}
       </div>
 
     </div>
@@ -89,19 +94,90 @@ function ChangeBaseMap({baseMapValue, updateBaseMap, baseMapList}) {
       
       <select
         value={baseMapValue}
-        onChange={(e) => updateBaseMap(e.target.value)}
+        onChange={(e) => {
+
+          updateBaseMap(e.target.value)
+          console.log(e.target.value)
+        }
+      }
       >
         {baseMapList.map((basemap) => (
-          <option value ={basemap.shortname}>{basemap.longname}</option>
+          <option key={basemap.key} value ={basemap.shortname}>{basemap.longname}</option>
         ))}
       </select>
 
     </form>
   );
 }
+function AddBaseMap({ onAddBaseMap}) {
+// function AddBaseMap() {
+  const [shortName, setShortName] = useState("");
+  const [longName, setLongName] = useState("");
+  const [attribution, setAttribution] = useState("");
+  const [url, setUrl] = useState("");
 
-function AddBaseMap() {
+  function handleSubmit(e) {
+    e.preventDefault();
+    const id = crypto.randomUUID();
+    const newBaseMap = {
+      key:id,
+      id,
+      shortname : shortName,
+      longname : longName,
+      attribution ,
+      url
+    };
+    onAddBaseMap(newBaseMap);
+    setShortName("");
+    setLongName("");
+    setAttribution("");
+    setUrl("");
+  }
+
+
+
+
+
   return (
-    <div className="add-base-map">Hello World</div>
+    <form className="add-base-map" onSubmit={handleSubmit}>
+      <label>Short name</label>
+      <input
+        type="text"
+        value={shortName}
+        onChange={(e) => setShortName(e.target.value)}
+      />
+
+      <label>Long Name</label>
+      <input
+        type="text"
+        value={longName}
+        onChange={(e) => setLongName(e.target.value)}
+      />
+
+      <label>Attribution</label>
+      <input
+        type="text"
+        value={attribution}
+        onChange={(e) => setAttribution(e.target.value)}
+      />
+
+      <label>URL</label>
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      />
+
+      <Button>Add</Button>
+
+    </form>
   )
+}
+
+function Button({ children, onClick }) {
+  return (
+    <button className="button" onClick={onClick}>
+      {children}
+    </button>
+  );
 }
