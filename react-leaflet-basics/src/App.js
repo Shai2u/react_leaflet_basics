@@ -25,7 +25,7 @@ const initalBasemaps = [
   },
   {
     id: 2,
-    key:2,
+    key: 2,
     shortname: 'carto',
     longname: 'Carto Dark',
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -51,17 +51,17 @@ const initalMarkers = [
 function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
-  const [showAddBaseMap, setShowAddBaseMap] = useState(false)  
+  const [showAddBaseMap, setShowAddBaseMap] = useState(false)
   const [showAddMarkers, setShowAddMarkers] = useState(false)
   const [markerPoints, setMarkerPoints] = useState(initalMarkers)
   const position = [31.784722, 35.204722]
-  
+
 
   // create custom icon
-  const customIcon = new Icon (
+  const customIcon = new Icon(
     {
       iconUrl: require("leaflet/dist/images/marker-icon.png"),
-      iconSize: [24,32]
+      iconSize: [24, 32]
     }
   )
 
@@ -75,8 +75,7 @@ function App() {
     setShowAddBaseMap((show) => !show);
   }
 
-  function handleAddMarkers(newMarker)
-  {
+  function handleAddMarkers(newMarker) {
     console.log('in handel add markers')
     setMarkerPoints((markers) => [...markers, newMarker]);
   }
@@ -88,13 +87,13 @@ function App() {
 
   return (
     <div className="App">
-{/* http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png */}
+      {/* http://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png */}
       <MapContainer center={position} zoom={13}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url={selectedBaseMap[0].url}
-      />
-      
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={selectedBaseMap[0].url}
+        />
+
         {
           markerPoints.map((markerData) => (
             <Marker position={markerData.position} icon={customIcon} key={markerData.key}>
@@ -110,20 +109,20 @@ function App() {
         <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
         {showAddBaseMap &&
           <AddBaseMap onAddBaseMap={handleAddBaseMap} />}
-          <br/>
+        <br />
 
 
         <Button onClick={handleShowBaseMap}>
           {showAddBaseMap ? "Close" : "Add Basemap"}
 
-          <br/>
+          <br />
 
-          </Button>
+        </Button>
         {showAddMarkers &&
-        <AddMarkers onAddMarkers ={handleAddMarkers} />
+          <AddMarkers onAddMarkers={handleAddMarkers} />
         }
 
-        <br/>
+        <br />
 
         <Button onClick={handleShowAddMarkers}>
           {showAddMarkers ? "close" : "Add new poitns"}
@@ -138,31 +137,31 @@ export default App;
 
 
 
-function ChangeBaseMap({baseMapValue, updateBaseMap, baseMapList}) {
+function ChangeBaseMap({ baseMapValue, updateBaseMap, baseMapList }) {
 
   return (
     <form className="change-base-map">
 
       <label>Change Base Map</label>
-      
+
       <select
         value={baseMapValue}
         onChange={(e) => {
 
           updateBaseMap(e.target.value)
         }
-      }
+        }
       >
         {baseMapList.map((basemap) => (
-          <option key={basemap.key} value ={basemap.shortname}>{basemap.longname}</option>
+          <option key={basemap.key} value={basemap.shortname}>{basemap.longname}</option>
         ))}
       </select>
 
     </form>
   );
 }
-function AddBaseMap({ onAddBaseMap}) {
-// function AddBaseMap() {
+function AddBaseMap({ onAddBaseMap }) {
+  // function AddBaseMap() {
   const [shortName, setShortName] = useState("");
   const [longName, setLongName] = useState("");
   const [attribution, setAttribution] = useState("");
@@ -172,11 +171,11 @@ function AddBaseMap({ onAddBaseMap}) {
     e.preventDefault();
     const id = crypto.randomUUID();
     const newBaseMap = {
-      key:id,
+      key: id,
       id,
-      shortname : shortName,
-      longname : longName,
-      attribution ,
+      shortname: shortName,
+      longname: longName,
+      attribution,
       url
     };
     onAddBaseMap(newBaseMap);
@@ -226,7 +225,7 @@ function AddBaseMap({ onAddBaseMap}) {
   )
 }
 
-function AddMarkers({onAddMarkers}) {
+function AddMarkers({ onAddMarkers }) {
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [popup, setPopup] = useState("");
@@ -235,8 +234,8 @@ function AddMarkers({onAddMarkers}) {
     e.preventDefault();
     const id = crypto.randomUUID();
     const newPopup = {
-      key:id,
-      position : [lat, long],
+      key: id,
+      position: [lat, long],
       label: popup,
       color: 'blue'
     };
@@ -246,23 +245,23 @@ function AddMarkers({onAddMarkers}) {
     setPopup("");
   }
   return (
-    <form className="add-marker"  onSubmit={handleSubmit}>
+    <form className="add-marker" onSubmit={handleSubmit}>
       <label>Lat</label>
       <input
         type="text"
-        value = {lat}
+        value={lat}
         onChange={(e) => setLat(e.target.value)}
       />
       <label>Long</label>
       <input
         type="text"
-        value = {long}
+        value={long}
         onChange={(e) => setLong(e.target.value)}
       />
       <label>popup message</label>
       <input
         type="text"
-        value = {popup}
+        value={popup}
         onChange={(e) => setPopup(e.target.value)}
       />
       <Button>Add</Button>
