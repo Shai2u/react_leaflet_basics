@@ -112,6 +112,7 @@ function App() {
         {showAddBaseMap &&
           <AddBaseMap onAddBaseMap={handleAddBaseMap} />}
         <br />
+        <MarkerList markerPoints={markerPoints}/>
 
 
         <Button onClick={handleShowBaseMap}>
@@ -278,4 +279,19 @@ function Button({ children, onClick }) {
       {children}
     </button>
   );
+}
+
+function MarkerList({markerPoints}){
+  return(
+    <ul>
+      {markerPoints.map((marker) => (
+        <li className={marker.color}>
+          {marker.position}
+          <br/>
+          {marker.label}
+        </li>
+      ))}
+    </ul>
+  )
+
 }
