@@ -8,7 +8,8 @@ import { useState } from "react";
 
 
 //IDeas
-// Add icons from a form
+// Add icons from a form Done
+// Add list of markers
 // change basemap - Done
 // change icon style
 // Add costum basemap style - Done
@@ -83,6 +84,16 @@ function App() {
     setShowAddMarkers((show) => !show);
   }
 
+  function handleClick(e){
+    console.log(e.latlng)
+    console.log('in')
+    console.log('in')
+
+    const map = useMapEvents({
+        map.flyTo(e.latlng, map.getZoom())
+      
+    })
+  }
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
 
   return (
@@ -96,7 +107,11 @@ function App() {
 
         {
           markerPoints.map((markerData) => (
-            <Marker position={markerData.position} icon={customIcon} key={markerData.key}>
+            <Marker position={markerData.position} icon={customIcon} key={markerData.key} eventHandlers={{
+              click: (e) => {
+                handleClick(e)
+              },
+            }}>
               <Popup>
                 {markerData.label}
               </Popup>
