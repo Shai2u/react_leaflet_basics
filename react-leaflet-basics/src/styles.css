@@ -79,10 +79,11 @@ form .button {
 }
 
 
-  .add-base-map{
+  .add-base-map .add-marker{
     padding: 3.2rem 5rem;
   }
   .change-base-map {
     display: flex;
     padding: 3.2rem 5rem;
   }
+  
