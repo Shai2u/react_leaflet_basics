@@ -51,7 +51,8 @@ const initalMarkers = [
 function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
-  const [showAddBaseMap, setShowAddBaseMap] = useState(false)
+  const [showAddBaseMap, setShowAddBaseMap] = useState(false)  
+  const [showAddMarkers, setShowAddMarkers] = useState(true)
   const [markerPoints, setMarkerPoints] = useState(initalMarkers)
   const position = [31.784722, 35.204722]
   
@@ -74,6 +75,9 @@ function App() {
     setShowAddBaseMap((show) => !show);
   }
 
+  function handleShowAddMarkers() {
+    setShowAddMarkers((show) => !show);
+  }
 
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
 
@@ -101,16 +105,23 @@ function App() {
         <ChangeBaseMap baseMapValue={baseMap} updateBaseMap={setBaseMap} baseMapList={baseMapList} />
         {showAddBaseMap &&
           <AddBaseMap onAddBaseMap={handleAddBaseMap} />}
+          <br/>
 
 
         <Button onClick={handleShowBaseMap}>
           {showAddBaseMap ? "Close" : "Add Basemap"}
-        </Button>
 
+          <br/>
+
+          </Button>
+        {showAddMarkers &&
         <AddMarkers/>
+        }
 
-        <Button>
-          Add new poitns
+        <br/>
+
+        <Button onClick={handleShowAddMarkers}>
+          {showAddMarkers ? "close" : "Add new poitns"}
         </Button>
       </div>
 
