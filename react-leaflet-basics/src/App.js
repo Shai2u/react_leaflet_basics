@@ -86,13 +86,9 @@ function App() {
 
   function handleClick(e){
     console.log(e.latlng)
-    console.log('in')
-    console.log('in')
 
-    const map = useMapEvents({
-        map.flyTo(e.latlng, map.getZoom())
-      
-    })
+
+
   }
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
 
