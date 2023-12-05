@@ -52,7 +52,7 @@ function App() {
   const [baseMap, setBaseMap] = useState("osm");
   const [baseMapList, setBaseMapList] = useState(initalBasemaps)
   const [showAddBaseMap, setShowAddBaseMap] = useState(false)  
-  const [showAddMarkers, setShowAddMarkers] = useState(true)
+  const [showAddMarkers, setShowAddMarkers] = useState(false)
   const [markerPoints, setMarkerPoints] = useState(initalMarkers)
   const position = [31.784722, 35.204722]
   
@@ -75,6 +75,11 @@ function App() {
     setShowAddBaseMap((show) => !show);
   }
 
+  function handleAddMarkers(newMarker)
+  {
+    console.log('in handel add markers')
+    setMarkerPoints((markers) => [...markers, newMarker]);
+  }
   function handleShowAddMarkers() {
     setShowAddMarkers((show) => !show);
   }
@@ -115,7 +120,7 @@ function App() {
 
           </Button>
         {showAddMarkers &&
-        <AddMarkers/>
+        <AddMarkers onAddMarkers ={handleAddMarkers} />
         }
 
         <br/>
@@ -221,7 +226,7 @@ function AddBaseMap({ onAddBaseMap}) {
   )
 }
 
-function AddMarkers() {
+function AddMarkers({onAddMarkers}) {
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [popup, setPopup] = useState("");
@@ -235,13 +240,13 @@ function AddMarkers() {
       label: popup,
       color: 'blue'
     };
-    // onAddMarker(newBaseMap);
-    lat("");
-    long("");
-    popup("");
+    onAddMarkers(newPopup);
+    setLat("");
+    setLong("");
+    setPopup("");
   }
   return (
-    <form className="add-marker">
+    <form className="add-marker"  onSubmit={handleSubmit}>
       <label>Lat</label>
       <input
         type="text"
