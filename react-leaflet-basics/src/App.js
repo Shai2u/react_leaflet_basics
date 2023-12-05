@@ -2,9 +2,9 @@ import './App.css';
 
 import "./styles.css";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import { Icon, marker } from 'leaflet';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 //IDeas
@@ -55,7 +55,7 @@ function App() {
   const [showAddBaseMap, setShowAddBaseMap] = useState(false)
   const [showAddMarkers, setShowAddMarkers] = useState(false)
   const [markerPoints, setMarkerPoints] = useState(initalMarkers)
-  const position = [31.784722, 35.204722]
+  const [position, setPosition] = useState([31.784722, 35.204722])
 
 
   // create custom icon
@@ -84,12 +84,7 @@ function App() {
     setShowAddMarkers((show) => !show);
   }
 
-  function handleClick(e){
-    console.log(e.latlng)
 
-
-
-  }
   const selectedBaseMap = baseMapList.filter(obj => obj['shortname'] === baseMap)
 
   return (
@@ -103,11 +98,7 @@ function App() {
 
         {
           markerPoints.map((markerData) => (
-            <Marker position={markerData.position} icon={customIcon} key={markerData.key} eventHandlers={{
-              click: (e) => {
-                handleClick(e)
-              },
-            }}>
+            <Marker position={markerData.position} icon={customIcon} key={markerData.key}>
               <Popup>
                 {markerData.label}
               </Popup>
