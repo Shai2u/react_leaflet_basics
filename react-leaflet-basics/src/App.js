@@ -211,11 +211,43 @@ function AddBaseMap({ onAddBaseMap}) {
 }
 
 function AddMarkers() {
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+  const [popup, setPopup] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const id = crypto.randomUUID();
+    const newPopup = {
+      key:id,
+      position : [lat, long],
+      label: popup,
+      color: 'blue'
+    };
+    // onAddMarker(newBaseMap);
+    lat("");
+    long("");
+    popup("");
+  }
   return (
-    <form >
-      <label>Label</label>
+    <form className="add-marker">
+      <label>Lat</label>
       <input
         type="text"
+        value = {lat}
+        onChange={(e) => setLat(e.target.value)}
+      />
+      <label>Long</label>
+      <input
+        type="text"
+        value = {long}
+        onChange={(e) => setLong(e.target.value)}
+      />
+      <label>popup message</label>
+      <input
+        type="text"
+        value = {popup}
+        onChange={(e) => setPopup(e.target.value)}
       />
       <Button>Add</Button>
     </form>
